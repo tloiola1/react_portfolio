@@ -342,38 +342,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-/*
-<Col md={7}>
-
-</Col>
-<Col md={5}>
-<h2 class="page-header col-sm-12">
-Connect With Me
-</h2>
-<hr/>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://github.com/tloiola1" target="_blank">
-    <img src="assets/images/gitHub.png" alt="gitHub" class="igf"/>
-</a>
-</div>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://www.linkedin.com/in/tarciso-loiola-264a1437/" target="_blank">
-    <img src="assets/images/linkedin.png" alt="LinkedIn" class="igf"/>
-</a>
-</div>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://www.freecodecamp.com/tloiola1" target="_blank">
-    <img src="assets/images/freecodecamp.png" alt="freecodecamp" class="igf"/>
-</a>
-</div>
-</Col>
-<hr/>
-<p class="text-justify">
-Want to get in touch with me? Would you like to know more about myself or my experience. Maybe an invitation to play some
-futebol(soccer), or maybe a few tips about where to go during your vacation in Brasil... fell free to drop me a line
-anytime.
-<br/> I promisse to reply as soon as I can.
-</p>
-
-*/
