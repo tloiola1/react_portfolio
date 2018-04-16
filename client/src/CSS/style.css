@@ -1,0 +1,147 @@
+body{
+    /* position: relative; */
+}
+
+.navbar-brand{
+    font-size: 5rem;
+    line-height: 30px;
+}
+
+.l{
+    letter-spacing: -1.6rem;
+}
+.background_img{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: fixed;
+}
+
+.profile_img{
+    height: 18rem;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px rgba(252, 250, 250, 0.7);
+}
+
+.margin-top{
+    margin-top: 10rem;
+}
+
+.about_caption{
+    margin: 0;
+    padding: 20px;
+    font-size: 20px;
+    text-align: justify;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.white{
+    color: rgb(255, 255, 255);
+}
+
+.blue039be5{
+    color: #039be5;
+}
+
+.background{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(80, 79, 79, 0.7);
+    opacity: 1.0;
+    box-sizing: border-box;
+    transition: height 500ms 0ms, opacity 500ms 500ms;
+}
+
+.portfolio_img{
+    min-height: 270px;
+    max-height: 270px;
+    width: 100%;
+}
+
+.relative{
+    position: relative;
+}
+
+button.project_name{
+    font-size: 2rem;
+    bottom: 2.5rem;
+    right: 4rem;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.project_name:hover{
+    color: #039be5;
+    border: 3px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+.connect_img{
+    width: 100%;
+    margin: 10px;
+    border: 5px solid transparent;
+    border-radius: 10%;
+}
+
+.connect_img:hover{
+    border: 1px;
+}
+
+.modal_img{
+    max-height: 150px;
+    max-width: 100px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.project_github{
+    width: 10%;
+    margin: 10px;
+    border: 5px solid transparent;
+    border-radius: 20%;
+}
+.project_github:hover{
+    border: 1px;
+}
+h4{
+    text-align: justify;
+}
+/*-----------------Footer-------------------------*/
+footer.page-footer{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	padding: 0px;
+	height: 20px;
+	background-color: #039be5 !important;
+	margin-top: 10px;
+}
+.small-footer{
+	font-size: 12px;
+	font-weight: bolder;
+	padding: 0px;
+	color: #424242;
+	float: right;
+}
+.footer{
+	float: right;
+	width: 100%;
+}
+
+/* Animation */
+.fade {
+    transition: ease-in 0.15s;
+    transition-property: opacity, transform;
+  }
+  
+  .fade-entering {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
