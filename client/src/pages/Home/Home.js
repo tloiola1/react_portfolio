@@ -114,20 +114,19 @@ class Home extends Component {
     render() {
         return (
             <body>
-                <Navbar fixedTop>
+                <Navbar fixedTop collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-
                             <a href="/">
                                 <strong>
                                     <span className='l'>L</span>
                                     <span className='t'>T</span>
                                 </strong>
                             </a>
-
                         </Navbar.Brand>
                         <Navbar.Toggle/>
                     </Navbar.Header>
+
                     <Navbar.Collapse>
                         <Nav pullRight>
                             <NavItem
@@ -180,11 +179,11 @@ class Home extends Component {
                             </Col>
                             <Col md={12} className='text-center'>
                                 <h1 className=' white w3-animate-opacity'>
-                                Thanks for the opportunity to show my hobby
+                                Thanks for the Opportunity to Show my Hobby
                                 <br/>
-                                My passion
+                                My Passion
                                 <br/>
-                                And to present myself as developer
+                                And to Present Myself as Developer
                                 </h1>
                             </Col>
                         </span>
@@ -280,7 +279,7 @@ class Home extends Component {
                                                      <span>
                                                         {this.state.connect.map(connect=>(
                                                             <span key={connect.id}>
-                                                            <Col md={4}>
+                                                            <Col md={4} sm={3} xs={4}>
                                                                 <a href={connect.link} target='_blank'>
                                                                 <Img className='connect_img w3-animate-right' alt='connect_img' src={connect.img}/>
                                                                 </a>
@@ -291,7 +290,7 @@ class Home extends Component {
                                                  )
                                                  : <span/>} 
                                                  </Col>
-                                                <Col md={12}>
+                                                <Col md={12} sm={12} xs={12}>
                                                 <div className='background margin-top'>
                                                     <p className='about_caption white w3-animate-opacity'>
                                                         {this.state.admin.connect_caption}
