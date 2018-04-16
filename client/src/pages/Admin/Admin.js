@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import validator from 'react-validation';
-import TypeWriter from 'react-typewriter';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 import {
     Grid,
     Row,
@@ -8,22 +8,18 @@ import {
     Nav,
     Navbar,
     NavItem,
-    MenuItem,
     Button,
     FormGroup,
     FormControl,
     ControlLabel, 
     Modal,
 } from 'react-bootstrap';
-import {Img, ProfileImg} from '../../components/Images';
+import {Img} from '../../components/Images';
 import PORT from '../../utils/PORTFOLIO';
 import ADMIN from "../../utils/ADMIN";
 
-class Home extends Component {
+class Admin extends Component {
     
-    componentDidMount() {
-        this.loadContent();
-    };
     constructor(props) {
         super(props);
         this.state = {
@@ -31,13 +27,15 @@ class Home extends Component {
             email: '',
             message: '',
             index: 0,
+            carousel: 0,
             render: 0,
             portfolio: [],
             connect: [],
             admin: [],
+            myself: [],
             background_img: '',
             profile_img: '',
-            write_this: `the project background 
+            write_this: `the project background
             your role and responsibilities 
             your process (if related)
             which programs you used (if related) 
@@ -48,13 +46,16 @@ class Home extends Component {
             project_img: '',
             project_header: '',
             project_techs: '',
+            project_github: '',
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
-
-    componentDid(){
-    }
+    
+    componentDidMount() {
+        this.loadContent();
+    };
+    
     loadContent() {
         PORT
         .Get()
@@ -65,22 +66,19 @@ class Home extends Component {
             })
             .catch(err => console.log(err));
             
-            ADMIN
+        ADMIN
             .Get()
             .then(res => {
                 this.setMyAdminStates(res.data[this.state.index]);
             })
             .catch(err => console.log(err));
             
-        };
-        
-    Content(){
-            this.setState({writer: this.state.write_this[0]});
-    }
+    };
     setMyAdminStates(data) {
         this.setState({admin: data});
+        this.setState({myself: data.myself});
         this.setState({connect: data.connect_imgs});
-        console.log(this.state.admin); // this.setState({profile_img: data.profile_img})
+        //  console.log(this.state.myself); this.setState({profile_img: data.profile_img})
     }
     
     renderContent(eventkey) {
@@ -99,12 +97,13 @@ class Home extends Component {
     handleEmail = event => this.setState({ email: event.target.value });
     handleMessage = event => this.setState({ message: event.target.value });
     
-    openModal(img, name, header, caption, techs){
+    openModal(img, name, header, caption, techs, github){
         this.setState({ project_img : img });
         this.setState({ project_name: name });
         this.setState({ project_header : header });
         this.setState({ project_caption: caption });
         this.setState({ project_techs : techs });
+        this.setState({ project_github : github });
         this.setState({ show: true });
     }
 
@@ -115,20 +114,19 @@ class Home extends Component {
     render() {
         return (
             <body>
-                <Navbar fixedTop>
+                <Navbar fixedTop collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-
                             <a href="/">
                                 <strong>
                                     <span className='l'>L</span>
                                     <span className='t'>T</span>
                                 </strong>
                             </a>
-
                         </Navbar.Brand>
                         <Navbar.Toggle/>
                     </Navbar.Header>
+
                     <Navbar.Collapse>
                         <Nav pullRight>
                             <NavItem
@@ -171,22 +169,36 @@ class Home extends Component {
                 <Grid>
                     <Row>
                     {this.state.render === 0
-                        ? 
+                        ?
                         <span>
-                        <TypeWriter className='margin-top white'style={{position: 'fixed'}} typing={0.5}>{this.state.write_this}</TypeWriter>
+                            <Col md={12}>
+                                <Img
+                                    className="profile_img margin-top w3-animate-opacity"
+                                    alt="profile_img"
+                                    src={this.state.admin.profile_img}/>
+                            </Col>
+                            <Col md={12} className='text-center'>
+                                <h1 className=' white w3-animate-opacity'>
+                                Thanks for the Opportunity to Show my Hobby
+                                <br/>
+                                My Passion
+                                <br/>
+                                And to Present Myself as Developer
+                                </h1>
+                            </Col>
                         </span>
                         :  this.state.render === 1
                             ? <span>
                                     <Col md={2} mdOffset={5} xs={4} xsOffset={4}>
                                         <Img
-                                            className="profile_img margin-top"
+                                            className="profile_img margin-top w3-animate-left"
                                             alt="profile_img"
                                             src={this.state.admin.profile_img}/>    
                                     </Col>
                                     <h2 className='white'>{this.state.admin.about_header}</h2>
                                     <hr/>
-                                    <Col md={10} mdOffset={1} xs={10} xsOffset={1} className='background'>
-                                        <p className='about_caption white'>
+                                    <Col md={10} mdOffset={1} xs={10} xsOffset={1} className='background  w3-animate-right'>
+                                        <p className='about_caption white w3-animate-opacity'>
                                             {this.state.admin.about_caption}
                                         </p>
                                     </Col>
@@ -205,16 +217,16 @@ class Home extends Component {
                                                         .portfolio
                                                         .map(project => (
                                                             <Col md={6}>
-                                                                <div key={project.id} className='background'>
+                                                                <div key={project.id} className='background w3-container w3-center w3-animate-zoom'>
                                                                     <a href={project.link} target='_blank'>
                                                                         <Img className='portfolio_img' alt='portfolio_img' src={project.img}/>
                                                                     </a>
-                                                                    <Button
-                                                                        className='project_name blue039be5'
-                                                                        onClick={() => {
-                                                                        this.openModal( project.img, project.name, project.header, project.caption,  project.techs)
-                                                                    }}>{project.name}</Button>
                                                                 </div>
+                                                                    <Button
+                                                                        className='project_name blue039be5 w3-container w3-center w3-animate-zoom'
+                                                                        onClick={() => {
+                                                                        this.openModal( project.img, project.name, project.header, project.caption, project.techs,  project.github)
+                                                                    }}>{project.name}</Button>
                                                             </Col>
                                                         ))}
                                                 </span>
@@ -224,7 +236,7 @@ class Home extends Component {
                                 : this.state.render === 3
                                     ? <span>
                                             <Col md={7}>
-                                                <h2 className='margin-top white'>{this.state.admin.contact_header}</h2>
+                                                <h2 className='margin-top white w3-animate-opacity'>{this.state.admin.contact_header}</h2>
                                                 <hr/>
                                                 <form>
                                                     <FormGroup
@@ -252,13 +264,12 @@ class Home extends Component {
                                                         <FormControl componentClass="textarea" placeholder="textarea" 
                                                         type="text"
                                                         value={this.state.message}
-                                                        placeholder=""
-                                                        onChange={this.handleMessage}/>/>
+                                                        onChange={this.handleMessage}/>
                                                     </FormGroup>
                                                 </form>
                                             </Col>
                                             <Col md={5}>
-                                                <h2 className='margin-top white'>
+                                                <h2 className='margin-top white w3-animate-opacity'>
                                                     {this.state.admin.connect_header}
                                                 </h2>
                                                 <hr/>
@@ -267,19 +278,21 @@ class Home extends Component {
                                                  ? (
                                                      <span>
                                                         {this.state.connect.map(connect=>(
-                                                            <Col md={4}>
-                                                                <a href={connect.link}>
-                                                                <Img className='connect_img' alt='connect_img' src={connect.img}/>
+                                                            <span key={connect.id}>
+                                                            <Col md={4} sm={3} xs={4}>
+                                                                <a href={connect.link} target='_blank'>
+                                                                <Img className='connect_img w3-animate-right' alt='connect_img' src={connect.img}/>
                                                                 </a>
                                                              </Col>
+                                                            </span>
                                                          ))}
                                                      </span>
                                                  )
                                                  : <span/>} 
                                                  </Col>
-                                                <Col md={12}>
+                                                <Col md={12} sm={12} xs={12}>
                                                 <div className='background margin-top'>
-                                                    <p className='about_caption white'>
+                                                    <p className='about_caption white w3-animate-opacity'>
                                                         {this.state.admin.connect_caption}
                                                     </p>
                                                 </div>
@@ -289,19 +302,24 @@ class Home extends Component {
                                     : <span />}
                         <Modal show={this.state.show} onHide={this.closeModal}>
                             <Modal.Header closeButton>
-                                <Modal.Title><img className='modal_img' src={this.state.project_img} alt='modal_img'/>{'  '}{this.state.project_name}</Modal.Title>
+                                <Modal.Title><img className='modal_img' src={this.state.project_img} alt='modal_img'/>{'  '}<h3>{this.state.project_name}</h3></Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <p>
+                                <h3>
                                     {this.state.project_header}
-                                </p>
-                                <p>
+                                </h3>
+                                <h4>
                                     {this.state.project_caption}
-                                </p>
-                                <p>
+                                </h4>
+                                <h3>
+                                    Technologies I Have Used
+                                </h3>
+                                <h4>
                                     {this.state.project_techs}
-                                </p>
+                                </h4>
                             </Modal.Body>
+                            <a href={this.state.project_github} target='_blank'>
+                            <Img className='project_github' src='http://res.cloudinary.com/promanager/image/upload/v1519439870/gitHub_htdxaz.png'/></a>
                             <Modal.Footer>
                                 <Button onClick={this.closeModal}>Close</Button>
                             </Modal.Footer>
@@ -323,39 +341,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
-
-/*
-<Col md={7}>
-
-</Col>
-<Col md={5}>
-<h2 class="page-header col-sm-12">
-Connect With Me
-</h2>
-<hr/>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://github.com/tloiola1" target="_blank">
-    <img src="assets/images/gitHub.png" alt="gitHub" class="igf"/>
-</a>
-</div>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://www.linkedin.com/in/tarciso-loiola-264a1437/" target="_blank">
-    <img src="assets/images/linkedin.png" alt="LinkedIn" class="igf"/>
-</a>
-</div>
-<div class="col-ls-4 col-md-4 col-sm-4">
-<a href="https://www.freecodecamp.com/tloiola1" target="_blank">
-    <img src="assets/images/freecodecamp.png" alt="freecodecamp" class="igf"/>
-</a>
-</div>
-</Col>
-<hr/>
-<p class="text-justify">
-Want to get in touch with me? Would you like to know more about myself or my experience. Maybe an invitation to play some
-futebol(soccer), or maybe a few tips about where to go during your vacation in Brasil... fell free to drop me a line
-anytime.
-<br/> I promisse to reply as soon as I can.
-</p>
-
-*/
+export default Admin;
