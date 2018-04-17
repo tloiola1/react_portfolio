@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import validator from 'react-validation';
-import 'pure-react-carousel/dist/react-carousel.es.css';
+import validator from 'react-validation'; 
 import {
     Grid,
     Row,
