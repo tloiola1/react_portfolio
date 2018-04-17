@@ -28,7 +28,10 @@ app.use(routes);
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/portfolio_db";
 mongoose.Promise = Promise;
-mongoose.connect( MONGODB_URI );
+mongoose.connect( MONGODB_URI, {
+  useMongoClient: true
+});
+
 
 // Start the server
 app.listen(PORT, function() {
