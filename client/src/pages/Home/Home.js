@@ -16,6 +16,7 @@ import {
 import {Img} from '../../components/Images';
 import PORT from '../../utils/PORTFOLIO';
 import ADMIN from "../../utils/ADMIN";
+import MSG from "../../utils/MSG";
 
 class Home extends Component {
     
@@ -23,6 +24,7 @@ class Home extends Component {
         super(props);
         this.state = {
             name: '',
+            phone: '',
             email: '',
             message: '',
             index: 0,
@@ -33,11 +35,6 @@ class Home extends Component {
             myself: [],
             background_img: '',
             profile_img: '',
-            write_this: `the project background
-            your role and responsibilities 
-            your process (if related)
-            which programs you used (if related) 
-            the outcome.`,
             show: false,
             project_name: '',
             project_caption: '',
@@ -76,7 +73,7 @@ class Home extends Component {
         this.setState({admin: data});
         this.setState({myself: data.myself});
         this.setState({connect: data.connect_imgs});
-        console.log(this.state.myself);//  console.log(this.state.myself); this.setState({profile_img: data.profile_img})
+        //  console.log(this.state.myself); this.setState({profile_img: data.profile_img})
     }
     
     renderContent(eventkey) {
@@ -92,6 +89,7 @@ class Home extends Component {
     }
     
     handleName = event => this.setState({ name: event.target.value });
+    handlePhone = event => this.setState({ phone: event.target.value });
     handleEmail = event => this.setState({ email: event.target.value });
     handleMessage = event => this.setState({ message: event.target.value });
     
@@ -107,6 +105,26 @@ class Home extends Component {
 
     closeModal() {
         this.setState({ show: false });
+    }
+
+    sendMessage = event =>{
+            const name= this.state.name;
+            const phone= this.state.phone;
+            const email= this.state.email;
+            const message= this.state.message;
+        MSG
+            .Post({
+                name,
+                phone,
+                email,
+                message
+            })
+            .then(res => {
+                console.log(res.status);
+                this.setState({render: 4});
+            })
+            .catch(err => console.log(err));
+        
     }
 
     render() {
@@ -261,6 +279,16 @@ class Home extends Component {
                                                     </FormGroup>
                                                     <FormGroup
                                                         controlId="formBasicText">
+                                                        <ControlLabel className='white'>Phone</ControlLabel>
+                                                        <FormControl
+                                                            type="text"
+                                                            value={this.state.phone}
+                                                            placeholder=""
+                                                            onChange={this.handlePhone}/>
+                                                        <FormControl.Feedback/>
+                                                    </FormGroup>
+                                                    <FormGroup
+                                                        controlId="formBasicText">
                                                         <ControlLabel className='white'>Email</ControlLabel>
                                                         <FormControl
                                                             type="text"
@@ -277,6 +305,7 @@ class Home extends Component {
                                                         onChange={this.handleMessage}/>
                                                     </FormGroup>
                                                 </form>
+                                                <Button bsStyle="success" bsSize="large" onClick={this.sendMessage}>Send</Button>
                                             </Col>
                                             <Col md={5}>
                                                 <h2 className='margin-top white w3-animate-opacity'>
@@ -309,6 +338,20 @@ class Home extends Component {
                                                 </Col>
                                             </Col>
                                         </Col>
+                                        : this.state.render === 4
+                                        ? <span>
+                                            <Col md={2} mdOffset={5} xs={4} xsOffset={4}>
+                                                <Img
+                                                    className="profile_img margin-top w3-animate-left"
+                                                    alt="profile_img"
+                                                    src={this.state.admin.profile_img}/>    
+                                            </Col>
+                                            <Col md={12} className='text-center'>
+                                                 <p className='white w3-animate-opacity'>
+                                                    Thank you,<br/>I'll be in touch with you shortly!
+                                                 </p>
+                                            </Col>
+                                        </span>
                                     : <span />}
                         <Modal show={this.state.show} onHide={this.closeModal}>
                             <Modal.Header closeButton>
