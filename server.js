@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 // const db = require("./models");
 const routes = require("./routes");
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));

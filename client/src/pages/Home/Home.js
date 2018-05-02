@@ -26,7 +26,6 @@ class Home extends Component {
             email: '',
             message: '',
             index: 0,
-            carousel: 0,
             render: 0,
             portfolio: [],
             connect: [],
@@ -77,7 +76,7 @@ class Home extends Component {
         this.setState({admin: data});
         this.setState({myself: data.myself});
         this.setState({connect: data.connect_imgs});
-        //  console.log(this.state.myself); this.setState({profile_img: data.profile_img})
+        console.log(this.state.myself);//  console.log(this.state.myself); this.setState({profile_img: data.profile_img})
     }
     
     renderContent(eventkey) {
@@ -112,7 +111,7 @@ class Home extends Component {
 
     render() {
         return (
-            <body>
+            <div>
                 <Navbar fixedTop collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -177,13 +176,25 @@ class Home extends Component {
                                     src={this.state.admin.profile_img}/>
                             </Col>
                             <Col md={12} className='text-center'>
-                                <h1 className=' white w3-animate-opacity'>
-                                Thanks for the Opportunity to Show my Hobby
-                                <br/>
-                                My Passion
-                                <br/>
-                                And to Present Myself as Developer
-                                </h1>
+                                
+                            {this.state.myself.length
+                                ? (
+                                    <span>
+                                        {this
+                                            .state
+                                            .myself
+                                            .map(my => (
+                                                <div key={my.id} className='w3-container w3-center '>
+                                                    <Col md={10} mdOffset={1}>
+                                                        <p className=' white w3-animate-opacity w3-animate-zoom'>
+                                                        {my.paragraph}
+                                                        </p>
+                                                    </Col>
+                                                </div>
+                                            ))}
+                                    </span>
+                                )
+                                : <span/>}
                             </Col>
                         </span>
                         :  this.state.render === 1
@@ -205,7 +216,7 @@ class Home extends Component {
                             : this.state.render === 2
                                 ? <span>
                                         <Col md={12}>
-                                            <h2 className='margin-top white'>Portfolio</h2>
+                                            <h2 className='margin-top white w3-animate-opacity'> Portfolio</h2>
                                             <hr/>
                                         </Col>
                                         {this.state.portfolio.length
@@ -233,7 +244,7 @@ class Home extends Component {
                                             : <span/>}
                                     </span>
                                 : this.state.render === 3
-                                    ? <span>
+                                    ? <Col md={12}>
                                             <Col md={7}>
                                                 <h2 className='margin-top white w3-animate-opacity'>{this.state.admin.contact_header}</h2>
                                                 <hr/>
@@ -297,7 +308,7 @@ class Home extends Component {
                                                 </div>
                                                 </Col>
                                             </Col>
-                                        </span>
+                                        </Col>
                                     : <span />}
                         <Modal show={this.state.show} onHide={this.closeModal}>
                             <Modal.Header closeButton>
@@ -326,16 +337,16 @@ class Home extends Component {
                     </Row>
                 </Grid>
                 <div className='margin-top'/>
-                <footer class="page-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="footer">
-                                <small class="small-footer">©copyright LT</small>
+                <footer className="page-footer">
+                    <div className="container">
+                        <div className="row">
+                            <div className="footer">
+                                <small className="small-footer">©copyright LT</small>
                             </div>
                         </div>
                     </div>
                 </footer>
-            </body>
+            </div>
         )
     }
 }
